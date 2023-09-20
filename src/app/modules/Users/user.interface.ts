@@ -4,8 +4,6 @@ export type IUser = {
     last: string;
   };
   username: string;
-  role: string;
   email: string;
-  password: string;
   isDeleted: boolean;
 };

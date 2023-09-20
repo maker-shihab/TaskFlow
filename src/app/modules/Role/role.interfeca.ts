@@ -4,6 +4,7 @@ export type IRole = {
   permissions: string[];
   isActive: boolean;
 };
+
 export enum RoleType {
   Admin = "Admin",
   Manager = "Manager",

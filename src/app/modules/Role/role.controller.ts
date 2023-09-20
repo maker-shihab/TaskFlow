@@ -35,11 +35,13 @@ const getSingleRole = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 // updateRole;
 // deleteRole;
 // getRolesByPermission: This route would retrieve roles based on their permissions.
 // assignPermissionsToRole: This route would assign permissions to a specific role.
 // removePermissionsFromRole: This route would remove permissions from a specific role.
+
 export const RoleController = {
   createRole,
   getAllRoles,

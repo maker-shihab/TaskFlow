@@ -27,17 +27,6 @@ const UserSchema = new Schema({
     lowercase: true,
     match: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
   },
-  password: {
-    type: "string",
-    required: true,
-    minlength: 8,
-    select: false, // Do not return password in response
-  },
-  role: {
-    type: "string",
-    enum: ["user", "admin"],
-    default: "user",
-  },
   isDeleted: {
     type: "boolean",
     default: false,

@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
-import { TTask } from "./task.interface";
+import { ITask } from "./task.interface";
 
 // Schema
-const TaskSchema = new Schema<TTask>(
+const TaskSchema = new Schema<ITask>(
   {
     title: { type: String, required: true },
     user: { type: String, required: true },
@@ -13,4 +13,4 @@ const TaskSchema = new Schema<TTask>(
   { timestamps: true }
 );
 
-export const Task = model<TTask>("Task", TaskSchema);
+export const Task = model<ITask>("Task", TaskSchema);

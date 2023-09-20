@@ -1,4 +1,4 @@
-export type TTask = {
+export type ITask = {
   title: string;
   user: string;
   description: string;

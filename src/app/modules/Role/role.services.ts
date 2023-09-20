@@ -11,7 +11,13 @@ const getAllRole = async () => {
   return result;
 };
 
+const getSingleRole = async (id: string) => {
+  const result = await Role.findById(id);
+  return result;
+};
+
 export const RoleServices = {
   createRole,
   getAllRole,
+  getSingleRole,
 };
