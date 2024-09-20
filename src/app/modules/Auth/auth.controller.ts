@@ -87,6 +87,18 @@ const authVerifyEmail = catchAsync(async (req, res) => {
   });
 });
 
+const authSendVerificationEmail = catchAsync(async (req, res) => {
+  const data = req.body;
+  const result = await AuthServices.authResendVerificationEmail(data);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Resend verification email sent successfully",
+    data: result,
+  });
+});
+
 const authResendVerificationEmail = catchAsync(async (req, res) => {
   const data = req.body;
   const result = await AuthServices.authResendVerificationEmail(data);
@@ -107,5 +119,6 @@ export const AuthController = {
   authForgotPassword,
   authResetPassword,
   authVerifyEmail,
+  authSendVerificationEmail,
   authResendVerificationEmail,
 };
