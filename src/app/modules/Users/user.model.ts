@@ -3,32 +3,32 @@ import { IUser } from "./user.interface";
 
 const UserSchema = new Schema({
   name: {
-    type: "string",
+    type: String,
     required: true,
     firstName: {
-      type: "string",
+      type: String,
       required: true,
     },
     lastName: {
-      type: "string",
+      type: String,
     },
   },
   username: {
-    type: "string",
+    type: String,
     required: true,
     unique: true,
     minlength: 5,
     maxlength: 20,
   },
   email: {
-    type: "string",
+    type: String,
     required: true,
     unique: true,
     lowercase: true,
     match: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
   },
   isDeleted: {
-    type: "boolean",
+    type: Boolean,
     default: false,
   },
 });

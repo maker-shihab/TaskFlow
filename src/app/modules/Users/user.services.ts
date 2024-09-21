@@ -1,11 +1,21 @@
+import { IAuth } from "../Auth/auth.interface";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
 
-const CreateUser = async (data: IUser) => {
-  const result = await User.create(data);
+const createViewer = async (authData: IAuth, userData: IUser) => {
+  const session = await User.startSession();
+  session.startTransaction();
+
+  try {
+  } catch (error) {}
+};
+
+const GetAllUser = async () => {
+  const result = await User.find();
   return result;
 };
 
 export const UserService = {
-  CreateUser,
+  createViewer,
+  GetAllUser,
 };

@@ -3,18 +3,6 @@ import sendResponse from "../../helpers/sendResponse";
 import catchAsync from "../../utils/catchAsync";
 import { AuthServices } from "./auth.services";
 
-const authRegister = catchAsync(async (req, res) => {
-  const data = req.body;
-  const result = await AuthServices.authRegister(data);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "User registered successfully",
-    data: result,
-  });
-});
-
 const authLogin = catchAsync(async (req, res) => {
   const data = req.body;
   const result = await AuthServices.authLogin(data);
@@ -112,7 +100,6 @@ const authResendVerificationEmail = catchAsync(async (req, res) => {
 });
 
 export const AuthController = {
-  authRegister,
   authLogin,
   authLogout,
   authRefreshToken,

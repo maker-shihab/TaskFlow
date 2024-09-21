@@ -1,11 +1,6 @@
 import { IAuth } from "./auth.interface";
 import { Auth } from "./auth.model";
 
-const authRegister = async (data: IAuth) => {
-  const result = await Auth.create(data);
-  return result;
-};
-
 const authLogin = async (data: IAuth) => {
   const result = await Auth.findOne({
     email: data.email,
@@ -74,7 +69,6 @@ const authResendVerificationEmail = async (data: IAuth) => {
 };
 
 export const AuthServices = {
-  authRegister,
   authLogin,
   authLogout,
   authRefreshToken,

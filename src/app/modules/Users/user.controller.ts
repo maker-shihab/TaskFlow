@@ -3,17 +3,30 @@ import sendResponse from "../../helpers/sendResponse";
 import catchAsync from "../../utils/catchAsync";
 import { UserService } from "./user.services";
 
-const CreateUser = catchAsync(async (req, res) => {
-  const user = await UserService.CreateUser(req.body);
+const createViewer = catchAsync(async (req, res) => {
+  const { authData, userData } = req.body;
+  const result = await UserService.createViewer(authData, userData);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "User created successfully",
+    message: "Viewer created successfully",
+    data: result,
+  });
+});
+
+const GetAllUser = catchAsync(async (req, res) => {
+  const user = await UserService.GetAllUser();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Users retrive successfully",
     data: user,
   });
 });
 
 export const UserController = {
-  CreateUser,
+  createViewer,
+  GetAllUser,
 };

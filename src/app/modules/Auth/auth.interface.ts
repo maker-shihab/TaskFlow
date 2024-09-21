@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 export type IAuth = {
   _id?: Types.ObjectId;
-  userId: string;
+  userId: String;
   email: string;
   emailVerified: boolean;
   password: string;

@@ -9,9 +9,9 @@ const authSchema = new Schema<IAuth>(
       auto: true,
     },
     userId: {
-      type: String,
+      type: Types.ObjectId,
       required: true,
-      unique: true,
+      ref: "User",
     },
     email: {
       type: String,
