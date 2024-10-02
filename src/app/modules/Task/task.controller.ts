@@ -6,17 +6,17 @@ const CreateTask = async (
   req: Request,
   res: Response
 ): Promise<TTask | null> => {
-  const data = req.body;
-
-  if (!data) {
-    throw new Error("Sorry something went wrong");
-  }
-
-  const result = await TaskServices.CreateTaskInToDB(data);
-
+  const result = await TaskServices.CreateTaskInToDB(req.body);
   if (!result) {
     throw new Error("Sorry something went wrong");
   }
+
+  res.status(200).json({
+    success: true,
+    message: "Task created successfully",
+    data: result,
+  });
+
   return result;
 };
 

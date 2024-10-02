@@ -11,7 +11,6 @@ async function bootstrap() {
       console.log(`🚀 Application is running on port ${config.port}`);
     });
   } catch (error) {
-    console.log(config.database_url);
     console.log(error);
   }
 }

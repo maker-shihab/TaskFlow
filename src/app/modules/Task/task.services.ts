@@ -1,8 +1,8 @@
 import { TTask } from "./task.interface";
-import { TaskModel } from "./task.model";
+import { Task } from "./task.model";
 
 const CreateTaskInToDB = async (data: TTask) => {
-  const result = await TaskModel.create(data);
+  const result = await Task.create(data);
   return result;
 };
 
