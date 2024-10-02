@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { Application, NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
+import globalErrorHandler from "./app/middlewares/globalErrorHandaller";
 import NotFound from "./app/middlewares/NotFound";
 import router from "./app/routes";
 
@@ -25,7 +26,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 });
 
 //global error handler
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 //handle not found
 app.use(NotFound);
