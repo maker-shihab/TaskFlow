@@ -1,11 +1,19 @@
-import { Server } from "http";
 import mongoose from "mongoose";
-import config from "./config";
-
-let server: Server;
+import app from "./app";
+import config from "./app/config";
 
 async function bootstrap() {
-  await mongoose.connect(config.database_url as string);
+  try {
+    await mongoose.connect(config.database_url as string);
+    console.log("🛢 Database connected successfully");
+
+    app.listen(config.port, () => {
+      console.log(`🚀 Application is running on port ${config.port}`);
+    });
+  } catch (error) {
+    console.log(config.database_url);
+    console.log(error);
+  }
 }
 
 bootstrap();
