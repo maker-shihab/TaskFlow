@@ -1,25 +1,43 @@
-import { Request, Response } from "express";
-import { TTask } from "./task.interface";
+import sendResponse from "../../helpers/sendResponse";
+import catchAsync from "../../utils/catchAsync";
 import { TaskServices } from "./task.services";
 
-const CreateTask = async (
-  req: Request,
-  res: Response
-): Promise<TTask | null> => {
+const CreateTask = catchAsync(async (req, res) => {
   const result = await TaskServices.CreateTaskInToDB(req.body);
-  if (!result) {
-    throw new Error("Sorry something went wrong");
-  }
 
-  res.status(200).json({
+  sendResponse(res, {
+    statusCode: 200,
     success: true,
     message: "Task created successfully",
     data: result,
   });
+});
 
-  return result;
-};
+const GetAllTasks = catchAsync(async (req, res) => {
+  const result = await TaskServices.GetAllTasks();
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Tasks fetched successfully",
+    data: result,
+  });
+});
+
+const GetSingleTasks = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await TaskServices.GetSingleTasks(id);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Task fetched successfully",
+    data: result,
+  });
+});
 
 export const TaskController = {
   CreateTask,
+  GetAllTasks,
+  GetSingleTasks,
 };
