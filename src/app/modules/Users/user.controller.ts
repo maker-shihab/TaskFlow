@@ -1,11 +1,11 @@
 import httpStatus from "http-status";
-import sendResponse from "../../helpers/sendResponse";
-import catchAsync from "../../utils/catchAsync";
+import sendResponse from "../../../helpers/sendResponse";
+import catchAsync from "../../../shared/catchAsync";
 import { UserService } from "./user.services";
 
 const createViewer = catchAsync(async (req, res) => {
-  const { authData, userData } = req.body;
-  const result = await UserService.createViewer(authData, userData);
+  const { auth, user } = req.body;
+  const result = await UserService.createViewer(auth, user);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

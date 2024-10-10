@@ -1,9 +1,10 @@
 export type IUser = {
   name: {
-    first: string;
-    last: string;
+    firstName: string;
+    lastName: string;
   };
   username: string;
+  role: string;
   teams: string[];
   address: {
     street: string;

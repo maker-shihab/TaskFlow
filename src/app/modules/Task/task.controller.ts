@@ -1,5 +1,5 @@
-import sendResponse from "../../helpers/sendResponse";
-import catchAsync from "../../utils/catchAsync";
+import sendResponse from "../../../helpers/sendResponse";
+import catchAsync from "../../../shared/catchAsync";
 import { TaskServices } from "./task.services";
 
 const CreateTask = catchAsync(async (req, res) => {

@@ -3,4 +3,6 @@ import { UserController } from "./user.controller";
 
 const router = Router();
 
-router.get("/", UserController.GetAllUser);
+router.post("/create-viewer", UserController.createViewer);
+
+export const UserRouter = router;

@@ -3,9 +3,9 @@ import cors from "cors";
 import express, { Application, NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 import path from "path";
-import globalErrorHandler from "./app/middlewares/globalErrorHandaller";
-import NotFound from "./app/middlewares/NotFound";
 import router from "./app/routes";
+import globalErrorHandler from "./middlewares/globalErrorHandaller";
+import NotFound from "./middlewares/NotFound";
 
 const app: Application = express();
 
@@ -31,7 +31,6 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
     message: "Welcome to the Task Flow App!",
   });
 });
-
 //global error handler
 app.use(globalErrorHandler);
 

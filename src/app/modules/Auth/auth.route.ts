@@ -11,3 +11,5 @@ router.post("/reset-password", AuthController.authResetPassword);
 router.post("/send-verification", AuthController.authSendVerificationEmail);
 router.post("/resend-verification", AuthController.authResendVerificationEmail);
 router.post("/verify-email", AuthController.authVerifyEmail);
+
+export const AuthRouter = router;

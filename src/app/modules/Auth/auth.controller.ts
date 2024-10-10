@@ -1,17 +1,27 @@
 import httpStatus from "http-status";
-import sendResponse from "../../helpers/sendResponse";
-import catchAsync from "../../utils/catchAsync";
+import sendResponse from "../../../helpers/sendResponse";
+import catchAsync from "../../../shared/catchAsync";
 import { AuthServices } from "./auth.services";
 
 const authLogin = catchAsync(async (req, res) => {
   const data = req.body;
   const result = await AuthServices.authLogin(data);
 
+  const { accessToken, refreshToken, user } = result;
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 3600000 * 24 * 30),
+  });
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "User logged in successfully",
-    data: result,
+    data: {
+      accessToken,
+      user,
+    },
   });
 });
 

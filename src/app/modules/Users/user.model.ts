@@ -1,10 +1,9 @@
 import { model, Schema } from "mongoose";
+import { ENUM_USER_ROLE } from "../../../enums/user";
 import { IUser } from "./user.interface";
 
 const UserSchema = new Schema({
   name: {
-    type: String,
-    required: true,
     firstName: {
       type: String,
       required: true,
@@ -20,12 +19,36 @@ const UserSchema = new Schema({
     minlength: 5,
     maxlength: 20,
   },
-  email: {
+  role: {
     type: String,
     required: true,
-    unique: true,
-    lowercase: true,
-    match: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+    enum: ENUM_USER_ROLE,
+  },
+  teams: {
+    type: [String],
+  },
+  address: {
+    type: String,
+    street: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+    zipCode: {
+      type: String,
+      match: /^[0-9]{5}$/,
+    },
+  },
+  phoneNumber: {
+    type: String,
+    match: /^\+\d{1,15}$/,
+  },
+  occupations: {
+    type: String,
   },
   isDeleted: {
     type: Boolean,

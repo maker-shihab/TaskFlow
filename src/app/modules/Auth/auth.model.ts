@@ -1,15 +1,14 @@
-import { model, Schema, Types } from "mongoose";
-import { RoleType } from "../Role/role.interfeca";
+import mongoose, { Schema } from "mongoose";
 import { IAuth } from "./auth.interface";
 
 const authSchema = new Schema<IAuth>(
   {
     _id: {
-      type: Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       auto: true,
     },
     userId: {
-      type: Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
@@ -28,22 +27,17 @@ const authSchema = new Schema<IAuth>(
       type: String,
       required: true,
       minlength: 8,
-      select: false,
-    },
-    role: {
-      type: String,
-      required: true,
-      enum: RoleType,
-    },
-    token: {
-      type: String,
-      select: false,
+      // select: false,
     },
     authProvider: {
       type: String,
-      default: null, // Example authentication provider type
+      default: null,
     },
     isAuthenticated: {
+      type: Boolean,
+      default: false,
+    },
+    isDeleted: {
       type: Boolean,
       default: false,
     },
@@ -53,4 +47,23 @@ const authSchema = new Schema<IAuth>(
   }
 );
 
-export const Auth = model<IAuth>("auth", authSchema);
+authSchema.pre("find", function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+authSchema.pre("findOne", function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+authSchema.post("save", function (doc, next) {
+  if (doc) {
+    doc.password = "";
+  }
+  next();
+});
+
+const Auth = mongoose.model<IAuth>("auth", authSchema);
+
+export default Auth;

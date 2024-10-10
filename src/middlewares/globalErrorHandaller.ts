@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import { TErrorSources } from "../app/interfaces/error";
 import config from "../config";
-import { TErrorSources } from "../interfaces/error";
 
 const globalErrorHandler = (
   err: any,
