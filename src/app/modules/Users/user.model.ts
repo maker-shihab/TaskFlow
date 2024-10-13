@@ -3,6 +3,10 @@ import { ENUM_USER_ROLE } from "../../../enums/user";
 import { IUser } from "./user.interface";
 
 const UserSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   name: {
     firstName: {
       type: String,
@@ -23,12 +27,12 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     enum: ENUM_USER_ROLE,
+    default: ENUM_USER_ROLE.Viewer,
   },
   teams: {
     type: [String],
   },
   address: {
-    type: String,
     street: {
       type: String,
     },
@@ -40,7 +44,6 @@ const UserSchema = new Schema({
     },
     zipCode: {
       type: String,
-      match: /^[0-9]{5}$/,
     },
   },
   phoneNumber: {

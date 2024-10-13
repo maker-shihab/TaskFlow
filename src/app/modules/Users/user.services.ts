@@ -1,7 +1,6 @@
-import { ENUM_USER_ROLE } from "../../../enums/user";
 import { hashPassword } from "../../../utils/passwordEncript";
 import { IAuth } from "../Auth/auth.interface";
-import { Auth } from "../Auth/auth.model";
+import Auth from "../Auth/auth.model";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
 
@@ -29,10 +28,11 @@ const createViewer = async (authData: IAuth, userData: IUser) => {
           {
             name: userData.name,
             username: userData.username,
-            teams: userData.teams,
-            address: userData.address,
-            phoneNumber: userData.phoneNumber,
-            occupations: userData.occupations,
+            role: userData.role,
+            teams: userData.teams || undefined,
+            address: userData.address || undefined,
+            phoneNumber: userData.phoneNumber || undefined,
+            occupations: userData.occupations || undefined,
             isDeleted: false,
           },
         ],
@@ -43,7 +43,6 @@ const createViewer = async (authData: IAuth, userData: IUser) => {
         [
           {
             userId: newUser[0]._id,
-            role: ENUM_USER_ROLE.Viewer,
             email: authData.email,
             password: hashedPassword,
           },

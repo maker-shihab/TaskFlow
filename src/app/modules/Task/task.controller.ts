@@ -3,7 +3,13 @@ import catchAsync from "../../../shared/catchAsync";
 import { TaskServices } from "./task.services";
 
 const CreateTask = catchAsync(async (req, res) => {
-  const result = await TaskServices.CreateTaskInToDB(req.body);
+  const accessToken = req.headers.authorization;
+  const data = req.body;
+  if (!accessToken) {
+    throw new Error("Access token not provided for Create Task");
+  }
+
+  const result = await TaskServices.CreateTaskInToDB(data, accessToken);
 
   sendResponse(res, {
     statusCode: 200,

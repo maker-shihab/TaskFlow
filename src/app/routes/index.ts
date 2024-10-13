@@ -1,15 +1,13 @@
 import { Router } from "express";
 import { AuthRouter } from "../modules/Auth/auth.route";
+import { ProjectRouter } from "../modules/Project/project.route";
 import { TaskRouter } from "../modules/Task/task.router";
+import { TeamRouter } from "../modules/Team/team.route";
 import { UserRouter } from "../modules/Users/user.route";
 
 const router = Router();
 
 const moduleRouter = [
-  {
-    path: "/task",
-    route: TaskRouter,
-  },
   {
     path: "/auth",
     route: AuthRouter,
@@ -17,6 +15,18 @@ const moduleRouter = [
   {
     path: "/user",
     route: UserRouter,
+  },
+  {
+    path: "/task",
+    route: TaskRouter,
+  },
+  {
+    path: "/project",
+    route: ProjectRouter,
+  },
+  {
+    path: "/team",
+    route: TeamRouter,
   },
 ];
 

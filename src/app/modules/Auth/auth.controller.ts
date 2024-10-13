@@ -3,11 +3,11 @@ import sendResponse from "../../../helpers/sendResponse";
 import catchAsync from "../../../shared/catchAsync";
 import { AuthServices } from "./auth.services";
 
-const authLogin = catchAsync(async (req, res) => {
+const loginWithEmail = catchAsync(async (req, res) => {
   const data = req.body;
   const result = await AuthServices.authLogin(data);
 
-  const { accessToken, refreshToken, user } = result;
+  const { accessToken, refreshToken } = result;
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
@@ -20,10 +20,32 @@ const authLogin = catchAsync(async (req, res) => {
     message: "User logged in successfully",
     data: {
       accessToken,
-      user,
     },
   });
 });
+
+// const loginWithGoogle = catchAsync(async (req, res) => {
+//   const { data } = req.query;
+//   const result = await AuthServices.loginWithGoogle(data);
+
+//   const { accessToken, refreshToken, user } = result;
+
+//   res.cookie("refreshToken", refreshToken, {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === "development",
+//     sameSite: "strict",
+//   });
+
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: "User logged in successfully",
+//     data: {
+//       accessToken,
+//       user,
+//     },
+//   });
+// });
 
 const authLogout = catchAsync(async (req, res) => {
   const data = req.body;
@@ -110,7 +132,8 @@ const authResendVerificationEmail = catchAsync(async (req, res) => {
 });
 
 export const AuthController = {
-  authLogin,
+  loginWithEmail,
+  // loginWithGoogle,
   authLogout,
   authRefreshToken,
   authForgotPassword,

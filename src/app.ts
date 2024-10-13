@@ -12,6 +12,14 @@ const app: Application = express();
 app.use(cors());
 app.use(cookieParser());
 
+// app.use(
+//   session({
+//     secret: config.session_secret || "default-secret",
+//     resave: false,
+//     saveUninitialized: true,
+//   })
+// );
+
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
